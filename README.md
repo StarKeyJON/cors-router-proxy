@@ -13,4 +13,7 @@ Deploy with one click here:
 ## Other Implementations
 
 Check out James Ward's [Saleforce CORS Proxy](https://github.com/jamesward/sf-cors-proxy) written in Scala.
+
 And also: https://github.com/ccoenraets/cors-proxy/blob/master/
+
+Credits to: https://github.com/honnamkuan/cors-cache-proxy/blob/
