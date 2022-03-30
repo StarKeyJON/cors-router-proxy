@@ -1,7 +1,7 @@
 # cors-router-proxy
 <h1>This is experimental! Use at your own risk!</h1>
 <h4>CORS router to solve browser => server CORS inflight request errors</h4>
-<p>When making an API call using JavaScript (using XMLHTTPRequest, $.ajax, acios, etc...):</p>
+<p>When making an API call using JavaScript (using XMLHTTPRequest, $.ajax, axios, etc...):</p>
 <ul>
   <li> Substitute the actual service URL with the Proxy URL </li>
 
