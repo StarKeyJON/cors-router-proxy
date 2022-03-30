@@ -1,40 +1,41 @@
-var express = require('express'),
-    request = require('request'),
-    bodyParser = require('body-parser'),
-    app = express();
+const corsAnywhere = require('cors-anywhere');
+const express = require('express');
+const apicache = require('apicache');
+const expressHttpProxy = require('express-http-proxy');
 
-var myLimit = typeof(process.argv[2]) != 'undefined' ? process.argv[2] : '100kb';
-console.log('Using limit: ', myLimit);
+const CORS_PROXY_PORT = 5000;
 
-app.use(bodyParser.json({limit: myLimit}));
-
-app.all('*', function (req, res, next) {
-
-    //*~~~~> Set CORS headers: allow all origins and headers: Methods locked down to only GET requests for production environment
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-    res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
-
-    if (req.method === 'OPTIONS') {
-        //*~~~> CORS Preflight
-        res.send();
-    } else {
-        var targetURL = req.header('Target');
-        if (!targetURL) {
-            res.send(500, { error: 'There is no Target header in the request' });
-            return;
-        }
-        request({ url: targetURL + req.url, method: req.method, json: req.body, headers: {'Authorization': req.header('Authorization')} },
-            function (error, response, body) {
-                if (error) {
-                    console.error('error: ' + response.statusCode)
-                }
-            }).pipe(res);
-    }
+// Create CORS server
+corsAnywhere.createServer({}).listen(CORS_PROXY_PORT, () => {
+  console.log(
+    `Internal CORS Anywhere server started at port ${CORS_PROXY_PORT}`
+  );
 });
 
-app.set('port', process.env.PORT || 3000);
+// Create express Cache server
+let app = express();
+app.get('/*', cacheMiddleware());
+app.options('/*', cacheMiddleware());
 
-app.listen(app.get('port'), function () {
-    console.log('Proxy server listening on port ' + app.get('port'));
+// Proxy to CORS server when request misses cache
+app.use(expressHttpProxy(`localhost:${CORS_PROXY_PORT}`));
+
+const APP_PORT = process.env.PORT || 8080;
+app.listen(APP_PORT, () => {
+  console.log(`External CORS cache server started at port ${APP_PORT}`);
 });
+
+
+
+/**
+ * Construct the caching middleware
+ */
+function cacheMiddleware() {
+  const cacheOptions = {
+    statusCodes: { include: [200] },
+    defaultDuration: 60000,
+    appendKey: (req, res) => req.method
+  };
+  let cacheMiddleware = apicache.options(cacheOptions).middleware();
+  return cacheMiddleware;
+}
