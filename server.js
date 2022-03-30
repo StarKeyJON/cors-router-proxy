@@ -12,7 +12,7 @@ app.all('*', function (req, res, next) {
 
     //*~~~~> Set CORS headers: allow all origins and headers: Methods locked down to only GET requests for production environment
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
     res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
 
     if (req.method === 'OPTIONS') {
