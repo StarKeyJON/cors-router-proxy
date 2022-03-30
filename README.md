@@ -3,16 +3,8 @@
 <h4>CORS router to solve browser => server CORS inflight request errors</h4>
 <p>When making an API call using JavaScript (using XMLHTTPRequest, $.ajax, axios, etc...):</p>
 <ul>
-  <li> Substitute the actual service URL with the Proxy URL </li>
-
-  <li>Set the query parameters, and body as usual</li>
-
-  <li>Set the actual service URL in a header named 'Target'</li>
-
-  <li>Send the request as usual</li>
- </ul>
-The proxy currently passes the "Authorization" header to the target endpoint. You can modify the proxy to pass additional headers (or all of them).
-
+  <li>Set the GET url endpoint + the requested endpoint: (I.E., "https://cors-router-proxy.herokuapp.com/https://www.monaconft.vip/api/metadata/7")</li>
+</ul>
 
 Deploy with one click here:
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
