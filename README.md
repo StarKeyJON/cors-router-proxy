@@ -15,3 +15,9 @@ The proxy currently passes the "Authorization" header to the target endpoint. Yo
 
 Deploy with one click here:
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+## Other Implementations
+
+Check out James Ward's [Saleforce CORS Proxy](https://github.com/jamesward/sf-cors-proxy) written in Scala.
+And also: https://github.com/ccoenraets/cors-proxy/blob/master/
