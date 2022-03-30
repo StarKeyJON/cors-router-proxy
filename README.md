@@ -17,3 +17,5 @@ Check out James Ward's [Saleforce CORS Proxy](https://github.com/jamesward/sf-co
 And also: https://github.com/ccoenraets/cors-proxy/blob/master/
 
 Credits to: https://github.com/honnamkuan/cors-cache-proxy/blob/
+
+Source code of current implementation: https://github.com/Rob--W/cors-anywhere/
