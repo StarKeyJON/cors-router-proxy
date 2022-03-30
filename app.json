@@ -1,0 +1,7 @@
+{
+    "name": "cors-router-proxy",
+    "description": "A barebones Node.js server app using Express and Request for CORS proxy routing GET requests",
+    "repository": "https://github.com/StarKeyJON/cors-router-proxy",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["node", "express", "static", "cors", "request"]
+  }
